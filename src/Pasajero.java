@@ -19,11 +19,7 @@ public class Pasajero extends Persona implements Validable {
         this.totalVuelos  = 0;
     }
 
-    //Asignación del rol mediante sobreescritura del método abstracto
-    @Override
-    public String getRol() {
-        return "Pasajero";
-    }
+
 
     //Sirve para actualizar los vuelos y la cantidad después de inicializar las variables en el constructor
     @Override
@@ -98,6 +94,11 @@ public class Pasajero extends Persona implements Validable {
 
     //Getters y Setters
 
+
+    @Override
+    public String getRol() {
+        return "Pasajero";
+    }
 
     public String getAsiento() {
         return asiento;
