@@ -128,5 +128,4 @@ public class Pasajero extends Persona implements Validable {
         }
         return resultado;
     }
-
-    }
+}
