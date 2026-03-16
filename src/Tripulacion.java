@@ -99,12 +99,12 @@ public class Tripulacion extends Persona {
         return totalVuelos;
     }
 
-
-    public Vuelo[] getVuelosAsignados() {
-        Vuelo[] copia = new Vuelo[totalVuelos];
+    public String getVuelosAsignados() {
+        if (totalVuelos == 0) return "Sin vuelos asignados.";
+        String resultado = "";
         for (int i = 0; i < totalVuelos; i++) {
-            copia[i] = vuelosAsignados[i];
+            resultado += "  [" + (i + 1) + "] " + vuelosAsignados[i] + "\n";
         }
-        return copia;
+        return resultado;
     }
 }
