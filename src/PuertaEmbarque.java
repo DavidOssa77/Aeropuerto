@@ -54,19 +54,15 @@ public class PuertaEmbarque implements Validable {
         return true;
     }
 
+    public Vuelo getVueloAsignado() {
+        if (totalVuelos == 0) {
+            return null;
+        }
+        return vuelosAsignados[totalVuelos - 1];
+    }
+
     @Override
     public boolean hayConflicto() {
-        for (int i = 0; i < totalVuelos; i++) {
-            for (int j = i + 1; j < totalVuelos; j++) {
-                if (vuelosAsignados[i] != null) {
-                    if (vuelosAsignados[j] != null) {
-                        if (vuelosAsignados[i].getHoraSalida().equals(vuelosAsignados[j].getHoraSalida())) {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
         return false;
     }
 
