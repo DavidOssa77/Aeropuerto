@@ -1,24 +1,23 @@
 public class Pasajero extends Persona implements Validable {
 
     //Atributos
-    private String  asiento;
+    private String asiento;
     private Vuelo[] vuelos;
     private int totalVuelos;
-    private double  pesoEquipaje;
+    private double pesoEquipaje;
 
     private static final int CAPACIDAD_INICIAL = 10;
-    private static final double LIMITE_EQUIPAJE   = 23.0;
+    private static final double LIMITE_EQUIPAJE = 23.0;
 
     //Constructor
     public Pasajero(String nombre, String identificacion, String nacionalidad,
                     String asiento, double pesoEquipaje) {
         super(nombre, identificacion, nacionalidad);
-        this.asiento      = asiento;
+        this.asiento = asiento;
         this.pesoEquipaje = pesoEquipaje;
-        this.vuelos       = new Vuelo[CAPACIDAD_INICIAL];
-        this.totalVuelos  = 0;
+        this.vuelos = new Vuelo[CAPACIDAD_INICIAL];
+        this.totalVuelos = 0;
     }
-
 
 
     //Sirve para actualizar los vuelos y la cantidad después de inicializar las variables en el constructor
@@ -40,7 +39,7 @@ public class Pasajero extends Persona implements Validable {
         return nombre != null && !nombre.isBlank()
                 && identificacion != null && !identificacion.isBlank()
                 && asiento != null && !asiento.isBlank()
-                && pesoEquipaje  >= 0;
+                && pesoEquipaje >= 0;
     }
 
     //Se define el conflicto como un exceso de equipaje
@@ -84,12 +83,12 @@ public class Pasajero extends Persona implements Validable {
     @Override
     public String toString() {
         return "Pasajero{"
-                + "nombre= '" +nombre+ '\''
-                + ", id= '" +identificacion+'\''
-                + ", nacionalidad= '" +nacionalidad+'\''
-                + ", asiento= '"+ asiento+'\''
-                + ", pesoEquipaje= '"+pesoEquipaje+ "kg'"
-                + ", totalVuelos= '"+totalVuelos+"'}";
+                + "nombre= '" + nombre + '\''
+                + ", id= '" + identificacion + '\''
+                + ", nacionalidad= '" + nacionalidad + '\''
+                + ", asiento= '" + asiento + '\''
+                + ", pesoEquipaje= '" + pesoEquipaje + "kg'"
+                + ", totalVuelos= '" + totalVuelos + "'}";
     }
 
     //Getters y Setters
@@ -119,12 +118,15 @@ public class Pasajero extends Persona implements Validable {
     public int getTotalVuelos() {
         return totalVuelos;
     }
-    //nos muestra los vuelos (puede que haya espacios vacíos en el array pero la copia solo toma los índices no nulos)
-    public Vuelo[] getVuelos() {
-        Vuelo[] copia = new Vuelo[totalVuelos];
+
+    //nos muestra los vuelos
+    public String getVuelos() {
+        if (totalVuelos == 0) return "Sin vuelos asignados.";
+        String resultado = "";
         for (int i = 0; i < totalVuelos; i++) {
-            copia[i] = vuelos[i];
+            resultado += "  [" + (i + 1) + "] " + vuelos[i] + "\n";
         }
-        return copia;
+        return resultado;
     }
-}
+
+    }
