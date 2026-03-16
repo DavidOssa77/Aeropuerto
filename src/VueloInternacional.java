@@ -48,16 +48,17 @@ public class VueloInternacional extends Vuelo  {
         if (destino == null || destino.isEmpty()) {
             return false;
         }
-        if (horaSalida == null || horaSalida.isEmpty()) {
-            return false;
-        }
         if (aerolinea == null || aerolinea.isEmpty()) {
             return false;
         }
         if (paisDestino == null || paisDestino.isEmpty()) {
             return false;
         }
+        if (!AeropuertoUtils.validarHorario(horaSalida))
+            return false;
+
         return true;
+
     }
 
     @Override
