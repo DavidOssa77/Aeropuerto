@@ -255,5 +255,94 @@ public class Main {
         } catch (PasajeroDuplicadoException e) {
             System.out.println("Error: " + e.getMessage());
         }
+
+
+
+        System.out.println("--------------------------------");
+        System.out.println("--- PRUEBAS GESTOR PUERTAS ---");
+        System.out.println("--------------------------------");
+
+        System.out.println("\n--- PRUEBA 1: Crear una puerta valida ---");
+        PuertaEmbarque puerta1 = new PuertaEmbarque("A3", 200);
+        System.out.println("Resultado: " + puerta1.toString());
+
+        System.out.println("\n--- PRUEBA 2: Crear una puerta con capacidad invalida ---");
+        PuertaEmbarque puerta2 = new PuertaEmbarque("B1", -50);
+        System.out.println("La puerta es valida: " + puerta2.validar());
+
+        System.out.println("\n--- PRUEBA 3: Crear una puerta con numeroPuerta null ---");
+        PuertaEmbarque puerta3 = new PuertaEmbarque(null, 100);
+        System.out.println("La puerta es valida: " + puerta3.validar());
+
+        System.out.println("\n--- PRUEBA 4: Verificar que una puerta nueva esta disponible ---");
+        PuertaEmbarque puerta4 = new PuertaEmbarque("C5", 150);
+        System.out.println("Esta disponible: " + puerta4.estaDisponible());
+
+        System.out.println("\n--- PRUEBA 5: Asignar un vuelo a una puerta disponible ---");
+        PuertaEmbarque puerta5 = new PuertaEmbarque("D2", 180);
+        puerta5.asignarVuelo(vuelo2);
+
+        System.out.println("\n--- PRUEBA 6: Asignar un vuelo a una puerta ya ocupada ---");
+        puerta5.asignarVuelo(vuelo3);
+
+        System.out.println("\n--- PRUEBA 7: Liberar una puerta ocupada ---");
+        puerta5.liberarPuerta();
+
+        System.out.println("\n--- PRUEBA 8: Comparar dos puertas con el mismo numero ---");
+        PuertaEmbarque puerta6 = new PuertaEmbarque("A3", 200);
+        PuertaEmbarque puerta7 = new PuertaEmbarque("A3", 100);
+        System.out.println("Son iguales: " + puerta6.equals(puerta7));
+
+        System.out.println("\n--- PRUEBA 9: Comparar dos puertas con diferente numero ---");
+        PuertaEmbarque puerta8 = new PuertaEmbarque("A3", 200);
+        PuertaEmbarque puerta9 = new PuertaEmbarque("B7", 200);
+        System.out.println("Son iguales: " + puerta8.equals(puerta9));
+
+        System.out.println("\n--- PRUEBA 10: Detectar conflicto de horario entre vuelos ---");
+        PuertaEmbarque puerta10 = new PuertaEmbarque("E1", 200);
+        puerta10.asignarVuelo(vuelo1);
+        puerta10.liberarPuerta();
+        puerta10.asignarVuelo(vuelo2);
+        System.out.println("Hay conflicto de horario: " + puerta10.hayConflicto());
+
+        System.out.println("\n--- PRUEBA 11: Agregar puertas al gestor ---");
+        GestorPuertas gestorPuertas = new GestorPuertas();
+        gestorPuertas.agregarPuerta(new PuertaEmbarque("A1", 100));
+        gestorPuertas.agregarPuerta(new PuertaEmbarque("A2", 150));
+        gestorPuertas.agregarPuerta(new PuertaEmbarque("A3", 200));
+        gestorPuertas.listarPuertas();
+
+        System.out.println("\n--- PRUEBA 12: Agregar una puerta duplicada al gestor ---");
+        gestorPuertas.agregarPuerta(new PuertaEmbarque("A1", 100));
+
+        System.out.println("\n--- PRUEBA 13: Asignar un vuelo a una puerta disponible en el gestor ---");
+        gestorPuertas.asignarPuerta(vuelo4);
+
+        System.out.println("\n--- PRUEBA 14: Asignar vuelo cuando no hay puertas disponibles ---");
+        GestorPuertas gestorLleno = new GestorPuertas();
+        PuertaEmbarque puertaOcupada = new PuertaEmbarque("Z1", 100);
+        puertaOcupada.asignarVuelo(vuelo1);
+        gestorLleno.agregarPuerta(puertaOcupada);
+        gestorLleno.asignarPuerta(vuelo3);
+
+        System.out.println("\n--- PRUEBA 15: Verificar conflictos en el gestor ---");
+        GestorPuertas gestorConflicto = new GestorPuertas();
+        PuertaEmbarque puertaConflicto1 = new PuertaEmbarque("G1", 200);
+        PuertaEmbarque puertaConflicto2 = new PuertaEmbarque("G2", 150);
+        VueloNacional vMismaHora1 = new VueloNacional("AV111", "Bogota", "Medellin", "10:00", "Avianca");
+        VueloNacional vMismaHora2 = new VueloNacional("AV222", "Cali", "Cartagena", "10:00", "Latam");
+        puertaConflicto1.asignarVuelo(vMismaHora1);
+        puertaConflicto2.asignarVuelo(vMismaHora2);
+        gestorConflicto.agregarPuerta(puertaConflicto1);
+        gestorConflicto.agregarPuerta(puertaConflicto2);
+        gestorConflicto.verificarConflictos();
+
+
+
+
+
     }
+
+
+
 }
