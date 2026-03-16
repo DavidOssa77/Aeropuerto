@@ -37,34 +37,50 @@ public class GestorPuertas {
                 throw new Exception("El vuelo no puede ser nulo.");
             }
             for (int i = 0; i < totalPuertas; i++) {
-                if (puertas[i].estaDisponible()) {
-                    puertas[i].asignarVuelo(v);
-                    return;
+                if (puertas[i] != null) {
+                    if (puertas[i].estaDisponible()) {
+                        puertas[i].asignarVuelo(v);
+                        return;
+                    }
                 }
             }
-            throw new PuertaOcupadaException("SIN_PUERTA_DISPONIBLE");
-        } catch (PuertaOcupadaException e) {
-            System.out.println("[ERROR] No hay puertas disponibles. " + e.getMessage());
+            throw new Exception("Todas las puertas estan ocupadas, no se pudo asignar el vuelo.");
         } catch (Exception e) {
             System.out.println("[ERROR] " + e.getMessage());
         }
     }
 
     public void verificarConflictos() {
-        System.out.println("\n=== Verificacion de conflictos de horario ===");
+        System.out.println("\n=== Puertas con vuelos a la misma hora ===");
         boolean hayAlguno = false;
+
         for (int i = 0; i < totalPuertas; i++) {
-            if (puertas[i].hayConflicto()) {
-                System.out.println("[CONFLICTO] Puerta '"
-                        + puertas[i].getNumeroPuerta()
-                        + "' tiene vuelos con horarios en conflicto.");
-                hayAlguno = true;
+            for (int j = i + 1; j < totalPuertas; j++) {
+                if (puertas[i] != null) {
+                    if (puertas[j] != null) {
+                        if (puertas[i].getVueloAsignado() != null) {
+                            if (puertas[j].getVueloAsignado() != null) {
+                                if (puertas[i].getVueloAsignado().getHoraSalida().equals(puertas[j].getVueloAsignado().getHoraSalida())) {
+                                    System.out.println("Hora: " + puertas[i].getVueloAsignado().getHoraSalida()
+                                            + " | Puerta " + puertas[i].getNumeroPuerta()
+                                            + " - " + puertas[i].getVueloAsignado().getAerolinea()
+                                            + " " + puertas[i].getVueloAsignado().getCodigoVuelo()
+                                            + " | Puerta " + puertas[j].getNumeroPuerta()
+                                            + " - " + puertas[j].getVueloAsignado().getAerolinea()
+                                            + " " + puertas[j].getVueloAsignado().getCodigoVuelo());
+                                    hayAlguno = true;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
+
         if (!hayAlguno) {
-            System.out.println("Sin conflictos detectados.");
+            System.out.println("No hay puertas con vuelos a la misma hora.");
         }
-        System.out.println("=============================================\n");
+        System.out.println("==========================================\n");
     }
 
     public void listarPuertas() {
