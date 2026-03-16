@@ -43,6 +43,13 @@ public class PuertaEmbarque implements Validable {
         return !ocupada;
     }
 
+    public Vuelo getVueloAsignado() {
+        if (totalVuelos == 0) {
+            return null;
+        }
+        return vuelosAsignados[totalVuelos - 1];
+    }
+
     @Override
     public boolean validar() {
         if (numeroPuerta == null) {
@@ -54,12 +61,6 @@ public class PuertaEmbarque implements Validable {
         return true;
     }
 
-    public Vuelo getVueloAsignado() {
-        if (totalVuelos == 0) {
-            return null;
-        }
-        return vuelosAsignados[totalVuelos - 1];
-    }
 
     @Override
     public boolean hayConflicto() {
