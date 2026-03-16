@@ -1,5 +1,11 @@
 public class Main {
+
     public static void main(String[] args) {
+
+
+        System.out.println("--------------------------------");
+        System.out.println("--- PRUEBAS GESTOR VUELOS ---");
+        System.out.println("--------------------------------");
 
         GestorVuelos gestor = new GestorVuelos();
 
@@ -8,9 +14,6 @@ public class Main {
         VueloInternacional vuelo3 = new VueloInternacional("LA500", "Bogotá", "Miami", "08:00", "LATAM", "Estados Unidos", true);
         VueloInternacional vuelo4 = new VueloInternacional("IB900", "Bogotá", "Madrid", "22:00", "Iberia", "España", false);
 
-        System.out.println("--------------------------------");
-        System.out.println("--- PRUEBAS GESTOR VUELOS ---");
-        System.out.println("--------------------------------");
 
 // PRUEBA 1: Agregar vuelos correctos
         System.out.println("\n--- PRUEBA 1: Agregar vuelos correctos ---");
@@ -96,8 +99,161 @@ public class Main {
         System.out.println("Total vuelos tras redimensionar: " + gestorRedim.getTotalVuelos());
 
 
+        System.out.println("--------------------------------");
+        System.out.println("------ PRUEBAS PASAJERO --------");
+        System.out.println("--------------------------------");
 
+
+        Pasajero p1 = new Pasajero("Juan", "1234", "Colombiana", "D14", 19.6);
+        Pasajero p2 = new Pasajero("Nicolás", "2468", "Peruana", "A28", 23.0);
+        Pasajero p3 = new Pasajero("Manuela", "1357", "Colombiana", "A1", 23.1);
+        Pasajero p4 = new Pasajero("Tomás", "", "Venezolana", "C5", 17.0);
+
+        // PRUEBA 1: visualización de los pasajeros
+        System.out.println("\nPRUEBA 1: visualización de los pasajeros\n");
+        System.out.println(p1);
+        System.out.println(p2);
+        p2.setAsiento("A15"); //prueba del setter
+        System.out.println(p2); //Cambio de asiento
+        System.out.println(p3);
+        System.out.println(p4);
+
+        // PRUEBA 2: validación
+        System.out.println("\nPRUEBA 2: validación\n");
+        System.out.println("pasajero 1 válido: " + p1.validar());
+        System.out.println("pasajero 2 válido: " + p2.validar());
+        System.out.println("pasajero 3 válido: " + p3.validar());
+        System.out.println("pasajero 4 válido: " + p4.validar());
+
+        // PRUEBA 3: existencia de equipajePesado()
+        System.out.println("\nPRUEBA 3: existencia de equipajePesado()\n");
+        System.out.println("pasajero 1 con exceso de equipaje: " + p1.equipajePesado());
+        System.out.println("pasajero 2 con exceso de equipaje: " + p2.equipajePesado()); // funciona en la frontera
+        System.out.println("pasajero 3 con exceso de equipaje: " + p3.equipajePesado());
+        p3.setPesoEquipaje(23.0); //prueba del setter
+        System.out.println("pasajero 3 con exceso de equipaje: " + p3.equipajePesado()); //ahora si es válido
+        System.out.println("pasajero 4 con exceso de equipaje: " + p4.equipajePesado());
+
+        // PRUEBA 4: equals() y hashCode()
+        System.out.println("\nPRUEBA 4: equals() y hashCode()\n");
+        Pasajero p1copy = new Pasajero("Juan", "1234", "Colombiana", "D14", 19.6);
+        System.out.println("p1 == p1copy (misma id): " + p1.equals(p1copy));
+        System.out.println("p1 == p2 (distinta id): " + p1.equals(p2));
+        System.out.println("p1.hashCode(): " + p1.hashCode());
+        System.out.println("p1copy.hashCode(): " + p1copy.hashCode());
+
+// PRUEBA 5: getRol()
+        System.out.println("\nPRUEBA 5: getRol()\n");
+        System.out.println("Rol p1: " + p1.getRol());
+
+// PRUEBA 6: asignación de vuelos
+        System.out.println("\nPRUEBA 6: asignación de vuelos");
+        p1.agregarVuelo(vuelo1);
+        p1.agregarVuelo(vuelo3);
+        System.out.println("p1.getVuelos(): " + p1.getVuelos());
+        System.out.println("p2.getVuelos(): " + p2.getVuelos());//no tiene vuelos asignados todavía
+        System.out.println("p1.getTotalVuelos() " + p1.getTotalVuelos());
+
+
+        System.out.println("--------------------------------");
+        System.out.println("----- PRUEBAS Tripulación ------");
+        System.out.println("--------------------------------");
+
+
+        Tripulacion t1 = new Tripulacion("Camilo", "7543", "Colombiana", "Piloto", "AA11");
+        Tripulacion t2 = new Tripulacion("Juan", "9345", "Alemán", "Copiloto", "BA11");
+        Tripulacion t3 = new Tripulacion("Sofia", "2451", "Canadiense", "Azafata", "CA11");
+        Tripulacion t4 = new Tripulacion("Julián", "4832", "Colombiana", "Azafato", "CA12");
+
+//PRUEBA 1: Visualizar tripulación
+        System.out.println("\nPRUEBA 1: Visualizar tripulación");
+        System.out.println(t1);
+        System.out.println(t2);
+        System.out.println(t3);
+        System.out.println(t4);
+
+//PRUEBA 2: getRol() en este caso cargo
+        System.out.println("\n getRol() en este caso cargo\n");
+        System.out.println(("t1.getRol(): " + t1.getRol()));
+        System.out.println(("t2.getRol(): " + t2.getRol()));
+        System.out.println(("t3.getRol(): " + t3.getRol()));
+        t3.setRol("Capitana");
+        t3.setLicencia("AA12");
+        System.out.println("Nuevo rol t3: " + t3.getRol());
+        System.out.println("Nueva licencia t3: " + t3.getLicencia());
+        System.out.println(("t4.getRol(): " + t4.getRol()));
+
+//PRUEBA 3: asinación de vuelos
+        System.out.println("\nPRUEBA 3: asignación de vuelos");
+        t1.asignarVuelo(vuelo1);
+        t1.asignarVuelo(vuelo4);
+        System.out.println("vuelos t1: " + t1.getVuelosAsignados());
+        System.out.println("total vuelos t1: " + t1.getTotalVuelos());
+        System.out.println("vuelos t2 " + t2.getVuelosAsignados());
+        System.out.println("total vuelos t2: " + t2.getTotalVuelos());
+
+
+        System.out.println("--------------------------------");
+        System.out.println("--- PRUEBAS GestorPasajeros ----");
+        System.out.println("--------------------------------");
+
+        GestorPasajeros gestor1 = new GestorPasajeros();
+
+//PRUEBA 1: registrar pasajero normal
+        System.out.println("\nPRUEBA 1 registrar pasajero normal\n");
+        try {
+            gestor1.registrarPasajero(p1);
+            gestor1.registrarPasajero(p2);
+            gestor1.registrarPasajero(p3);
+            System.out.println("Total pasajeros " + gestor1.getTotalPasajeros());
+        } catch (PasajeroDuplicadoException e) {
+            System.out.println("Error, hay pasajeros duplicados: " + e.getMessage());
+        }
+//PRUEBA 2: registrar pasajero duplicado
+        System.out.println("\nPRUEBA 2 registrar pasajero duplicado\n");
+        try {
+            gestor1.registrarPasajero(p1copy);
+            System.out.println("Total pasajeros " + gestor1.getTotalPasajeros());
+        } catch (PasajeroDuplicadoException e) {
+            System.out.println("Error, hay pasajeros duplicados: " + e.getMessage());
+        }
+
+//PRUEBA 3: registrar pasajero nulo
+        System.out.println("\nPRUEBA 3 registrar pasajero nulo\n");
+        try {
+            gestor1.registrarPasajero(null);
+            System.out.println("Total pasajeros " + gestor1.getTotalPasajeros()); //ignora el nulo
+        } catch (PasajeroDuplicadoException e) {
+            System.out.println("Error, hay pasajeros duplicados: " + e.getMessage());
+        }
+
+//PRUEBA 4: listar pasajeros
+        System.out.println("\nPRUEBA 4 listar pasajeros\n");
+        System.out.println(gestor1.listarPasajeros());
+
+//PRUEBA 5: buscar pasajeros existentes y no existentes
+        System.out.println("\nPRUEBA 5: buscar pasajeros existentes y no existentes\n");
+        gestor1.buscarPasajero("1357");
+        gestor1.buscarPasajero("99999");
+
+//PRUEBA 6: eliminar pasajero existente e inexistente
+        System.out.println("\nPRUEBA 6: eliminar pasajero existente\n");
+        gestor1.eliminarPasajero("2468");
+        gestor1.eliminarPasajero("2468");
+        System.out.println(gestor1.getPasajeros());
+        System.out.println("Nuevo total de pasajeros: " + gestor1.getTotalPasajeros());
+
+//PRUEBA 7: redimensionar
+        System.out.println("\nPRUEBA 7: redimensionar\n");
+        GestorPasajeros gestorGrande = new GestorPasajeros();
+        try {
+            for (int i = 1; i <= 12; i++) {
+                Pasajero p = new Pasajero("Pasajero" + i, "ID" + i, "Colombiana", i + "A", 10.0);
+                gestorGrande.registrarPasajero(p);
+            }
+            System.out.println("Total registrados: " + gestorGrande.getTotalPasajeros()); // 12
+        } catch (PasajeroDuplicadoException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
-
-
 }
